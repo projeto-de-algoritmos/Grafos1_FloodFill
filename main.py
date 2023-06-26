@@ -56,21 +56,17 @@ def flood_fill_bfs(screen_array, start_pos, fill_color):
     while not q.empty():
         x, y = q.get()
 
-        # If the current position is already visited or out of screen boundary, skip
         if (x, y) in visited or x < 0 or x >= ROWS or y < 0 or y >= COLS:
             continue
 
-        # If the current position has the same color as the starting position, fill it with the fill color
         if screen_array[x][y] == start_color:
             screen_array[x][y] = fill_color
 
-            # Add the neighboring positions to the queue
             q.put((x-1, y))
             q.put((x+1, y))
             q.put((x, y-1))
             q.put((x, y+1))
 
-            # Draw the filled screen
             pygame.draw.rect(WIN, screen_array[x][y], (x, y, PIXEL_SIZE, PIXEL_SIZE))
 
         visited.add((x, y))
